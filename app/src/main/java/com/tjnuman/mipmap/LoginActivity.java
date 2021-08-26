@@ -2,6 +2,7 @@ package com.tjnuman.mipmap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,12 +27,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn.startAnimation();
-
-
-//You can choose the color and the image after the loading is finished
                 btn.doneLoadingAnimation(R.color.black, myLogo);
+                Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                startActivity(intent);
+                finish();
 
-               // btn.revertAnimation();
             }
         });
 
