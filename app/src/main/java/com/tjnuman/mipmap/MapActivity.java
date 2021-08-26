@@ -2,7 +2,9 @@ package com.tjnuman.mipmap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,11 +37,13 @@ public class MapActivity extends AppCompatActivity {
 
         );
 
-//        getAlldata.setOnClickListener(v ->
-//                getAlldata()
-//
-//        );
-
+        getAlldata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
