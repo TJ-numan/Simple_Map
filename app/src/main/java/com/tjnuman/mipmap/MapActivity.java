@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MapActivity extends AppCompatActivity {
     TextView textView;
     Button getAlldata,getSingledata;
+    String lattitude,longitutde;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
 
         textView = findViewById(R.id.textView);
-//        getAlldata = findViewById(R.id.button);
+        getAlldata = findViewById(R.id.button);
         getSingledata = findViewById(R.id.button2);
 
 
@@ -41,6 +42,8 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                intent.putExtra("latitude", lattitude);
+                intent.putExtra("longitude", longitutde);
                 startActivity(intent);
             }
         });
@@ -76,7 +79,9 @@ public class MapActivity extends AppCompatActivity {
                 content += "city: " + postModel.getCity() + "\n";
                 content += "zip: " + postModel.getZip() + "\n";
                 content += "latitude: " + postModel.getLatitude() + "\n";
+                 lattitude = postModel.getLatitude();
                 content += "longitude: " + postModel.getLongitude() + "\n\n";
+                 longitutde = postModel.getLongitude();
 
                 textView.setText(content);
 

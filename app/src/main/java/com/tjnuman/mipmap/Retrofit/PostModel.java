@@ -1,7 +1,5 @@
 package com.tjnuman.mipmap.Retrofit;
 
-import com.google.gson.annotations.SerializedName;
-
 public class PostModel {
     private String city;
     private String  ip;
@@ -12,10 +10,10 @@ public class PostModel {
     private String zip;
     private String country_code;
     private String country_name;
-    private float latitude;
-    private float longitude;
+    private String latitude;
+    private String longitude;
 
-    public PostModel(String ip, String continent_code, String continent_name, String region_code, String region_name, String zip, float latitude, float longitude) {
+    public PostModel(String ip, String continent_code, String continent_name, String region_code, String region_name, String zip, String latitude, String longitude) {
         this.ip = ip;
         this.continent_code = continent_code;
         this.continent_name = continent_name;
@@ -102,19 +100,19 @@ public class PostModel {
         this.zip = zip;
     }
 
-    public float getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 }
