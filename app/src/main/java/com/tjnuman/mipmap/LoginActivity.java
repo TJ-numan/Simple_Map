@@ -14,6 +14,7 @@ import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import br.com.simplepass.loading_button_lib.interfaces.OnAnimationEndListener;
 
 public class LoginActivity extends AppCompatActivity {
+    CircularProgressButton btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Bitmap myLogo = BitmapFactory.decodeResource(this.getResources(), R.drawable.checked);
 
-        CircularProgressButton btn = (CircularProgressButton) findViewById(R.id.cirLoginButton);
+        btn = (CircularProgressButton) findViewById(R.id.cirLoginButton);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
