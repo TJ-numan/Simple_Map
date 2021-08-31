@@ -27,12 +27,13 @@ public class LocationActivity extends AppCompatActivity {
     String latitude, longitude;
     SupportMapFragment mapFragment;
     FusedLocationProviderClient client;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-        TextView textView = findViewById(R.id.locationshow);
+        textView = findViewById(R.id.locationshow);
 
         // getting latitude and longitude from api activity
         latitude = getIntent().getStringExtra("latitude");
@@ -49,11 +50,10 @@ public class LocationActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             //when permission granted show the location
             showLocation();
-        }
-        else {
+        } else {
             //permission is denied, request for permission
             ActivityCompat.requestPermissions(LocationActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
 
@@ -65,6 +65,16 @@ public class LocationActivity extends AppCompatActivity {
 
     private void showLocation() {
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Task<Location> locationTask = client.getLastLocation();
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -77,8 +87,10 @@ public class LocationActivity extends AppCompatActivity {
                         public void onMapReady(@NonNull GoogleMap googleMap) {
                             //initialaize
                             LatLng latLng = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
+                            //Double.parseDouble(latitude),Double.parseDouble(longitude)
+                            //location.getLatitude(),location.getLongitude()
                             double lati  =  location.getLatitude();
-                            Log.d("lati", String.valueOf(lati));
+                           // Log.d("latitttude", String.valueOf(lati));
 
                             //create marker options
                             MarkerOptions options = new MarkerOptions()
@@ -92,6 +104,9 @@ public class LocationActivity extends AppCompatActivity {
                             googleMap.addMarker(options);
                         }
                     });
+                }
+                else{
+                    textView.setText(String.valueOf(location));
                 }
             }
         });
